@@ -1,0 +1,27 @@
+.search-box-container {
+  width: 100%;
+  max-width: 540px;
+  margin-bottom: 20px;
+}
+
+.search-box-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 540px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.contact-form + .search-box {
+  margin-top: 20px;
+}
