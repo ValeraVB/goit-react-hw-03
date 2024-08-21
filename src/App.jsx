@@ -2,14 +2,8 @@ import { useState, useEffect } from "react";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContartList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
+import initialContacts from "./data/contacts.json";
 import "./App.css";
-
-const initialContacts = [
-  { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-  { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-  { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-  { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-];
 
 const loadContactsFromLocalStorage = () => {
   const savedContacts = localStorage.getItem("contacts");
@@ -21,7 +15,9 @@ const saveContactsToLocalStorage = (contacts) => {
 };
 
 const App = () => {
-  const [contacts, setContacts] = useState(loadContactsFromLocalStorage);
+  const [contacts, setContacts] = useState(() =>
+    loadContactsFromLocalStorage()
+  );
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
