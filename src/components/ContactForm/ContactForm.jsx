@@ -1,6 +1,6 @@
 import { useFormik, Field, FormikProvider } from "formik";
 import * as Yup from "yup";
-import { useId } from "react";
+import { nanoid } from "nanoid";
 import "./ContactForm.css";
 
 const ContactForm = ({ onAddContact }) => {
@@ -12,20 +12,20 @@ const ContactForm = ({ onAddContact }) => {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .min(2, "Too Short!")
+        .min(3, "Too Short!")
         .max(50, "Too Long!")
         .required("Name is required"),
       number: Yup.string()
         .required("Number is required")
         .matches(/^\d+$/, "Number must be digits only")
-        .min(5, "Number is too short!")
-        .max(20, "Number is too long!"),
+        .min(3, "Number is too short!")
+        .max(50, "Number is too long!"),
     }),
     validateOnChange: true, // Валідація при зміні поля
     validateOnBlur: true, // Валідація при втраті фокусу
     onSubmit: (values, { resetForm }) => {
       const newContact = {
-        id: `id-${Date.now()}`,
+        id: nanoid(), // Генерація унікального ідентифікатора
         name: values.name,
         number: values.number,
       };
@@ -34,17 +34,13 @@ const ContactForm = ({ onAddContact }) => {
     },
   });
 
-  // Генерація унікальних ID для полів форми
-  const nameId = useId();
-  const numberId = useId();
-
   return (
     <FormikProvider value={formik}>
       <form onSubmit={formik.handleSubmit} className="contact-form">
         <div className="input-group">
-          <label htmlFor={nameId}>Name</label>
+          <label htmlFor="name">Name</label>
           <Field
-            id={nameId}
+            id="name"
             name="name"
             type="text"
             required
@@ -58,9 +54,9 @@ const ContactForm = ({ onAddContact }) => {
           ) : null}
         </div>
         <div className="input-group">
-          <label htmlFor={numberId}>Number</label>
+          <label htmlFor="number">Number</label>
           <Field
-            id={numberId}
+            id="number"
             name="number"
             type="tel"
             required
