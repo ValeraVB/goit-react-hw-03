@@ -3,7 +3,7 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContartList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
 import initialContacts from "./data/contacts.json";
-import "./App.css";
+import styles from "./App.module.css";
 
 const loadContactsFromLocalStorage = () => {
   const savedContacts = localStorage.getItem("contacts");
@@ -43,7 +43,7 @@ const App = () => {
   );
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Phonebook</h1>
       <ContactForm onAddContact={addContact} />
       <SearchBox value={filter} onChange={handleFilterChange} />
